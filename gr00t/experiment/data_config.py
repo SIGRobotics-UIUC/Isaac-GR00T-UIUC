@@ -206,7 +206,39 @@ class FourierGr1ArmsOnlyDataConfig(BaseDataConfig):
 
 
 ###########################################################################################
+class So101ArmsDataConfig(BaseDataConfig):
+        video_keys = ["video.right", "video.left", "video.top_depth"]
+            state_keys = [
+                            "state.left_arm",
+                                    "state.gripper1",
+                                            "state.right_arm",
+                                                    "state.gripper2",
+                                                        ]
+                action_keys = [
+                                "action.left_arm",
+                                        "action.gripper1",
+                                                "action.right_arm",
+                                                        "action.gripper2",
+                                                            ]
+                    language_keys = ["annotation.human.task_description"]
+                        observation_indices = [0]
+                            action_indices = list(range(16))
 
+                                def modality_config(self):
+                                            video_modality = ModalityConfig(
+                                                                delta_indices=self.observation_indices,
+                                                                            modality_keys=self.video_keys,
+                                                                                    )
+                                                    state_modality = ModalityConfig(
+                                                                        delta_indices=self.observation_indices,
+                                                                                    modality_keys=self.state_keys,
+                                                                                            )
+                                                            action_modality = ModalityConfig(
+                                                                                delta_indices=self.action_indices,
+                                                                                            modality_keys=self.action_keys,
+                                                                                                    )
+                                                                    language_modality = ModalityConfig(
+                                                                                 
 
 class So100DataConfig(BaseDataConfig):
     video_keys = ["video.webcam"]
@@ -411,7 +443,28 @@ class FourierGr1FullUpperBodyDataConfig(BaseDataConfig):
 
 
 ###########################################################################################
+class BimanualSo101DataConfig(So101ArmsDataConfig):
+        # For bimanual setup, override keys if needed
+            video_keys = ["video.right", "video.left", "video.top_depth"]
+                state_keys = [
+                                "state.left_arm",
+                                        "state.gripper1",
+                                                "state.right_arm",
+                                                        "state.gripper2"
+                                                                            ]
+                    action_keys = [
+                                    "action.left_arm",
+                                            "action.gripper1",
+                                                    "action.right_arm",
+                                                            "action.gripper2"
+                                                                                ]
+                        language_keys = ["annotation.human.task_description"]
 
+                            def modality_config(self):
+                                        return super().modality_config()
+
+                                        def transform(self):
+                                                    return super().transform()
 
 class BimanualPandaGripperDataConfig(BaseDataConfig):
     video_keys = [
@@ -781,6 +834,8 @@ DATA_CONFIG_MAP = {
     "single_panda_gripper": SinglePandaGripperDataConfig(),
     "so100": So100DataConfig(),
     "so100_dualcam": So100DualCamDataConfig(),
+    "so101": So101ArmsDataConfig(),
+    "bimanual_so101_arms": BimanualSo101DataConfig(),
     "unitree_g1": UnitreeG1DataConfig(),
     "unitree_g1_full_body": UnitreeG1FullBodyDataConfig(),
     "oxe_droid": OxeDroidDataConfig(),
