@@ -1,0 +1,63 @@
+  0%|                                                                                               | 0/500 [00:00<?, ?it/s]Could not estimate the number of tokens of the input, floating-point operations will not be computed
+ 18%|███████████████▋                                                                      | 91/500 [06:35<29:18,  4.30s/it]Traceback (most recent call last):
+{'loss': 0.7833, 'grad_norm': 2.158766031265259, 'learning_rate': 3.6e-05, 'epoch': 0.01}
+{'loss': 0.1809, 'grad_norm': 1.4917240142822266, 'learning_rate': 7.6e-05, 'epoch': 0.01}
+{'loss': 0.1521, 'grad_norm': 1.4528378248214722, 'learning_rate': 9.998250366089848e-05, 'epoch': 0.02}
+{'loss': 0.1223, 'grad_norm': 0.8114290237426758, 'learning_rate': 9.97858104436822e-05, 'epoch': 0.02}
+{'loss': 0.1004, 'grad_norm': 1.3014901876449585, 'learning_rate': 9.937141654477528e-05, 'epoch': 0.03}
+{'loss': 0.0952, 'grad_norm': 0.7189488410949707, 'learning_rate': 9.87411340032603e-05, 'epoch': 0.04}
+{'loss': 0.0672, 'grad_norm': 0.666488528251648, 'learning_rate': 9.789771888432375e-05, 'epoch': 0.04}
+{'loss': 0.0735, 'grad_norm': 1.0041487216949463, 'learning_rate': 9.684485922768422e-05, 'epoch': 0.05}
+{'loss': 0.0596, 'grad_norm': 0.4608326256275177, 'learning_rate': 9.558715892073323e-05, 'epoch': 0.05}
+  File "/workspace/Isaac-GR00T/scripts/gr00t_finetune.py", line 420, in <module>
+    main(config)
+  File "/workspace/Isaac-GR00T/scripts/gr00t_finetune.py", line 392, in main
+    experiment.train()
+  File "/workspace/Isaac-GR00T/gr00t/experiment/runner.py", line 173, in train
+    self.trainer.train(resume_from_checkpoint=self.resume_from_checkpoint)
+  File "/workspace/Isaac-GR00T/gr00t/experiment/trainer.py", line 158, in train
+    return super().train(resume_from_checkpoint, trial, ignore_keys_for_eval, **kwargs)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 2245, in train
+    return inner_training_loop(
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 2514, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 5243, in get_batch_samples
+    batch_samples.append(next(epoch_iterator))
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/accelerate/data_loader.py", line 563, in __iter__
+    next_batch = next(dataloader_iter)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+    data = self._next_data()
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1515, in _next_data
+    return self._process_data(data, worker_id)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1550, in _process_data
+    data.reraise()
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/_utils.py", line 749, in reraise
+    raise RuntimeError(msg) from None
+RuntimeError: Caught MemoryError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 349, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/workspace/Isaac-GR00T/gr00t/data/dataset.py", line 541, in __getitem__
+    return self.transforms(self.get_step_data(trajectory_id, base_index))
+  File "/workspace/Isaac-GR00T/gr00t/data/dataset.py", line 575, in get_step_data
+    data[key] = self.get_data_by_modality(trajectory_id, modality, key, base_index)
+  File "/workspace/Isaac-GR00T/gr00t/data/dataset.py", line 857, in get_data_by_modality
+    return self.get_video(trajectory_id, key, base_index)
+  File "/workspace/Isaac-GR00T/gr00t/data/dataset.py", line 705, in get_video
+    return get_frames_by_timestamps(
+  File "/workspace/Isaac-GR00T/gr00t/utils/video.py", line 147, in get_frames_by_timestamps
+    for frame in reader:
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torchvision/io/video_reader.py", line 201, in __next__
+    frame = next(self._c)
+  File "av/container/input.pyx", line 208, in decode
+  File "av/packet.pyx", line 80, in av.packet.Packet.decode
+  File "av/video/stream.pyx", line 41, in av.video.stream.VideoStream.decode
+  File "av/video/stream.pyx", line 50, in av.video.stream.VideoStream.decode
+  File "av/codec/context.pyx", line 462, in av.codec.context.CodecContext.decode
+  File "av/codec/context.pyx", line 238, in av.codec.context.CodecContext.open
+  File "av/error.pyx", line 326, in av.error.err_check
+av.error.MemoryError: [Errno 12] Cannot allocate memory

@@ -1,0 +1,21 @@
+{"time":"2025-10-19T21:04:12.596849415Z","level":"INFO","msg":"using version","core version":"0.18.0"}
+{"time":"2025-10-19T21:04:12.59747298Z","level":"INFO","msg":"created symlink","path":"/workspace/Isaac-GR00T/wandb/run-20251019_210412-yjkh9z83/logs/debug-core.log"}
+{"time":"2025-10-19T21:04:12.59869805Z","level":"INFO","msg":"using version","core version":"0.18.0"}
+{"time":"2025-10-19T21:04:12.599762529Z","level":"INFO","msg":"created symlink","path":"/workspace/Isaac-GR00T/wandb/run-20251019_210412-yjkh9z83/logs/debug-core.log"}
+{"time":"2025-10-19T21:04:12.615006537Z","level":"INFO","msg":"created new stream","id":"yjkh9z83"}
+{"time":"2025-10-19T21:04:12.615566401Z","level":"INFO","msg":"stream: started","id":"yjkh9z83"}
+{"time":"2025-10-19T21:04:12.615668322Z","level":"INFO","msg":"handler: started","stream_id":{"value":"yjkh9z83"}}
+{"time":"2025-10-19T21:04:12.615638832Z","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"yjkh9z83"}}
+{"time":"2025-10-19T21:04:12.615742073Z","level":"INFO","msg":"sender: started","stream_id":{"value":"yjkh9z83"}}
+{"time":"2025-10-19T21:04:13.019940726Z","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2025-10-19T21:04:13.030752117Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-10-19T21:04:21.25419306Z","level":"INFO","msg":"stream: closing","id":"yjkh9z83"}
+{"time":"2025-10-19T21:04:21.254358081Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-10-19T21:04:21.256762932Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-10-19T21:04:21.526711561Z","level":"WARN","msg":"No job ingredients found, not creating job artifact"}
+{"time":"2025-10-19T21:04:21.527589419Z","level":"WARN","msg":"No source type found, not creating job artifact"}
+{"time":"2025-10-19T21:04:21.527948512Z","level":"INFO","msg":"sender: sendDefer: no job artifact to save"}
+{"time":"2025-10-19T21:04:22.701411773Z","level":"INFO","msg":"handler: closed","stream_id":{"value":"yjkh9z83"}}
+{"time":"2025-10-19T21:04:22.701447883Z","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"yjkh9z83"}}
+{"time":"2025-10-19T21:04:22.701518043Z","level":"INFO","msg":"sender: closed","stream_id":{"value":"yjkh9z83"}}
+{"time":"2025-10-19T21:04:22.706330813Z","level":"INFO","msg":"stream: closed","id":"yjkh9z83"}

@@ -1,0 +1,53 @@
+  0%|                                                                                              | 0/10000 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/workspace/Isaac-GR00T/scripts/gr00t_finetune.py", line 420, in <module>
+    main(config)
+  File "/workspace/Isaac-GR00T/scripts/gr00t_finetune.py", line 392, in main
+    experiment.train()
+  File "/workspace/Isaac-GR00T/gr00t/experiment/runner.py", line 173, in train
+    self.trainer.train(resume_from_checkpoint=self.resume_from_checkpoint)
+  File "/workspace/Isaac-GR00T/gr00t/experiment/trainer.py", line 158, in train
+    return super().train(resume_from_checkpoint, trial, ignore_keys_for_eval, **kwargs)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 2245, in train
+    return inner_training_loop(
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 2514, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 5243, in get_batch_samples
+    batch_samples.append(next(epoch_iterator))
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/accelerate/data_loader.py", line 552, in __iter__
+    current_batch = next(dataloader_iter)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 701, in __next__
+    data = self._next_data()
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1465, in _next_data
+    return self._process_data(data)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1491, in _process_data
+    data.reraise()
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/_utils.py", line 714, in reraise
+    raise RuntimeError(msg) from None
+RuntimeError: Caught MemoryError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 351, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/workspace/Isaac-GR00T/gr00t/data/dataset.py", line 541, in __getitem__
+    return self.transforms(self.get_step_data(trajectory_id, base_index))
+  File "/workspace/Isaac-GR00T/gr00t/data/dataset.py", line 575, in get_step_data
+    data[key] = self.get_data_by_modality(trajectory_id, modality, key, base_index)
+  File "/workspace/Isaac-GR00T/gr00t/data/dataset.py", line 857, in get_data_by_modality
+    return self.get_video(trajectory_id, key, base_index)
+  File "/workspace/Isaac-GR00T/gr00t/data/dataset.py", line 705, in get_video
+    return get_frames_by_timestamps(
+  File "/workspace/Isaac-GR00T/gr00t/utils/video.py", line 147, in get_frames_by_timestamps
+    for frame in reader:
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torchvision/io/video_reader.py", line 200, in __next__
+    frame = next(self._c)
+  File "av/container/input.pyx", line 208, in decode
+  File "av/packet.pyx", line 80, in av.packet.Packet.decode
+  File "av/video/stream.pyx", line 41, in av.video.stream.VideoStream.decode
+  File "av/video/stream.pyx", line 50, in av.video.stream.VideoStream.decode
+  File "av/codec/context.pyx", line 462, in av.codec.context.CodecContext.decode
+  File "av/codec/context.pyx", line 238, in av.codec.context.CodecContext.open
+  File "av/error.pyx", line 326, in av.error.err_check
+av.error.MemoryError: [Errno 12] Cannot allocate memory

@@ -1,0 +1,41 @@
+  0%|                                                                                              | 0/10000 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/workspace/Isaac-GR00T/scripts/gr00t_finetune.py", line 420, in <module>
+    main(config)
+  File "/workspace/Isaac-GR00T/scripts/gr00t_finetune.py", line 392, in main
+    experiment.train()
+  File "/workspace/Isaac-GR00T/gr00t/experiment/runner.py", line 173, in train
+    self.trainer.train(resume_from_checkpoint=self.resume_from_checkpoint)
+  File "/workspace/Isaac-GR00T/gr00t/experiment/trainer.py", line 158, in train
+    return super().train(resume_from_checkpoint, trial, ignore_keys_for_eval, **kwargs)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 2245, in train
+    return inner_training_loop(
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 2560, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 3736, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/workspace/Isaac-GR00T/gr00t/experiment/trainer.py", line 80, in compute_loss
+    outputs = model(inputs)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/accelerate/utils/operations.py", line 823, in forward
+    return model_forward(*args, **kwargs)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/accelerate/utils/operations.py", line 811, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+  File "/workspace/Isaac-GR00T/gr00t/model/gr00t_n1.py", line 165, in forward
+    backbone_inputs, action_inputs = self.prepare_input(inputs)
+  File "/workspace/Isaac-GR00T/gr00t/model/gr00t_n1.py", line 195, in prepare_input
+    backbone_inputs = tree.map_structure(to_device_with_maybe_dtype, backbone_inputs)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/tree/__init__.py", line 435, in map_structure
+    [func(*args) for args in zip(*map(flatten, structures))])
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/tree/__init__.py", line 435, in <listcomp>
+    [func(*args) for args in zip(*map(flatten, structures))])
+  File "/workspace/Isaac-GR00T/gr00t/model/gr00t_n1.py", line 190, in to_device_with_maybe_dtype
+    return x.to(self.device, dtype=self.action_head.dtype)
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.

@@ -1,0 +1,54 @@
+{
+  "os":  "Linux-6.11.0-26-generic-x86_64-with-glibc2.39",
+  "python":  "3.10.18",
+  "startedAt":  "2025-10-19T20:47:09.845274Z",
+  "args":  [
+    "--dataset-path",
+    "../datasets/matcha-making",
+    "--num-gpus",
+    "1",
+    "--output-dir",
+    "../models",
+    "--max-steps",
+    "10000",
+    "--data-config",
+    "examples.SO-101.custom_data_config:So101BimanualDataConfig",
+    "--video-backend",
+    "torchvision_av",
+    "--embodiment-tag",
+    "new_embodiment"
+  ],
+  "program":  "/workspace/Isaac-GR00T/scripts/gr00t_finetune.py",
+  "codePath":  "scripts/gr00t_finetune.py",
+  "email":  "acmbambu3dprinter@gmail.com",
+  "root":  "/workspace/Isaac-GR00T",
+  "host":  "6d9865796db4",
+  "username":  "root",
+  "executable":  "/workspace/miniconda3/envs/gr00t/bin/python",
+  "codePathLocal":  "scripts/gr00t_finetune.py",
+  "cpu_count":  120,
+  "cpu_count_logical":  120,
+  "gpu":  "[NVIDIA GeForce RTX 5090]",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "32212254720",
+      "used":  "16072704"
+    }
+  },
+  "memory":  {
+    "total":  "1014509744128"
+  },
+  "cpu":  {
+    "count":  120,
+    "countLogical":  120
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce RTX 5090",
+      "memoryTotal":  "34190917632",
+      "cudaCores":  21760
+    }
+  ],
+  "cudaVersion":  "12.8"
+}

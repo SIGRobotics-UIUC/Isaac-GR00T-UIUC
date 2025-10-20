@@ -1,0 +1,21 @@
+{"time":"2025-10-19T23:28:56.627697464Z","level":"INFO","msg":"using version","core version":"0.18.0"}
+{"time":"2025-10-19T23:28:56.628237509Z","level":"INFO","msg":"created symlink","path":"/workspace/Isaac-GR00T/wandb/run-20251019_232856-y41dthq8/logs/debug-core.log"}
+{"time":"2025-10-19T23:28:56.62961146Z","level":"INFO","msg":"using version","core version":"0.18.0"}
+{"time":"2025-10-19T23:28:56.630434036Z","level":"INFO","msg":"created symlink","path":"/workspace/Isaac-GR00T/wandb/run-20251019_232856-y41dthq8/logs/debug-core.log"}
+{"time":"2025-10-19T23:28:56.640259388Z","level":"INFO","msg":"created new stream","id":"y41dthq8"}
+{"time":"2025-10-19T23:28:56.640641112Z","level":"INFO","msg":"stream: started","id":"y41dthq8"}
+{"time":"2025-10-19T23:28:56.640673362Z","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"y41dthq8"}}
+{"time":"2025-10-19T23:28:56.640706802Z","level":"INFO","msg":"sender: started","stream_id":{"value":"y41dthq8"}}
+{"time":"2025-10-19T23:28:56.640770253Z","level":"INFO","msg":"handler: started","stream_id":{"value":"y41dthq8"}}
+{"time":"2025-10-19T23:28:57.042543447Z","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2025-10-19T23:28:57.051849054Z","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-10-19T23:35:33.373993578Z","level":"INFO","msg":"stream: closing","id":"y41dthq8"}
+{"time":"2025-10-19T23:35:33.374173829Z","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-10-19T23:35:33.376902462Z","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-10-19T23:35:33.58338461Z","level":"WARN","msg":"No job ingredients found, not creating job artifact"}
+{"time":"2025-10-19T23:35:33.583755634Z","level":"WARN","msg":"No source type found, not creating job artifact"}
+{"time":"2025-10-19T23:35:33.584109776Z","level":"INFO","msg":"sender: sendDefer: no job artifact to save"}
+{"time":"2025-10-19T23:35:34.982573297Z","level":"INFO","msg":"handler: closed","stream_id":{"value":"y41dthq8"}}
+{"time":"2025-10-19T23:35:34.982668597Z","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"y41dthq8"}}
+{"time":"2025-10-19T23:35:34.982689667Z","level":"INFO","msg":"sender: closed","stream_id":{"value":"y41dthq8"}}
+{"time":"2025-10-19T23:35:34.985299619Z","level":"INFO","msg":"stream: closed","id":"y41dthq8"}

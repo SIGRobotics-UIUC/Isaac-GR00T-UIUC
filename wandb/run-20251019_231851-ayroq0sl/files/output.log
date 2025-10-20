@@ -1,0 +1,37 @@
+  0%|                                                                                             | 0/10000 [00:00<?, ?it/s]Could not estimate the number of tokens of the input, floating-point operations will not be computed
+  1%|▊                                                                                | 93/10000 [07:34<11:29:54,  4.18s/it]Traceback (most recent call last):
+{'loss': 1.2074, 'grad_norm': 10.853060722351074, 'learning_rate': 1.8e-06, 'epoch': 0.01}
+{'loss': 1.0375, 'grad_norm': 4.739246845245361, 'learning_rate': 3.8e-06, 'epoch': 0.01}
+{'loss': 0.5566, 'grad_norm': 1.799110770225525, 'learning_rate': 5.8e-06, 'epoch': 0.02}
+{'loss': 0.269, 'grad_norm': 1.0263739824295044, 'learning_rate': 7.8e-06, 'epoch': 0.02}
+{'loss': 0.1713, 'grad_norm': 1.1497870683670044, 'learning_rate': 9.800000000000001e-06, 'epoch': 0.03}
+{'loss': 0.1537, 'grad_norm': 0.9499927163124084, 'learning_rate': 1.18e-05, 'epoch': 0.04}
+{'loss': 0.1107, 'grad_norm': 1.2306692600250244, 'learning_rate': 1.3800000000000002e-05, 'epoch': 0.04}
+{'loss': 0.1053, 'grad_norm': 0.9746178984642029, 'learning_rate': 1.58e-05, 'epoch': 0.05}
+{'loss': 0.0873, 'grad_norm': 0.7746964693069458, 'learning_rate': 1.78e-05, 'epoch': 0.05}
+  File "/workspace/Isaac-GR00T/scripts/gr00t_finetune.py", line 420, in <module>
+    main(config)
+  File "/workspace/Isaac-GR00T/scripts/gr00t_finetune.py", line 392, in main
+    experiment.train()
+  File "/workspace/Isaac-GR00T/gr00t/experiment/runner.py", line 173, in train
+    self.trainer.train(resume_from_checkpoint=self.resume_from_checkpoint)
+  File "/workspace/Isaac-GR00T/gr00t/experiment/trainer.py", line 158, in train
+    return super().train(resume_from_checkpoint, trial, ignore_keys_for_eval, **kwargs)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 2245, in train
+    return inner_training_loop(
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 2560, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/transformers/trainer.py", line 3726, in training_step
+    model.train()
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2855, in train
+    module.train(mode)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2855, in train
+    module.train(mode)
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2855, in train
+    module.train(mode)
+  [Previous line repeated 4 more times]
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2853, in train
+    self.training = mode
+  File "/workspace/miniconda3/envs/gr00t/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1974, in __setattr__
+    modules = self.__dict__.get("_modules")
+KeyboardInterrupt
