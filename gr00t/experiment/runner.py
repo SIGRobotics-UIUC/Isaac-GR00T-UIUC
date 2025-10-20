@@ -28,6 +28,8 @@ from gr00t.utils.experiment import (
     CheckpointFormatCallback,
     safe_save_model_for_hf_trainer,
 )
+from gr00t.utils.huggingface_upload import create_uploader_from_env
+from gr00t.utils.huggingface_callback import HuggingFaceUploadCallback
 
 
 class TrainRunner:
@@ -154,15 +156,30 @@ class TrainRunner:
             run_name=run_name, exp_cfg_dir=self.exp_cfg_dir
         )
         trainer.add_callback(ckpt_format_callback)
+        
+        # Add Hugging Face upload callback if configured
+        hf_uploader = create_uploader_from_env()
+        if hf_uploader is not None:
+            hf_callback = HuggingFaceUploadCallback(
+                uploader=hf_uploader,
+                upload_final=True,
+                upload_checkpoints=hf_uploader.upload_on_save,
+            )
+            trainer.add_callback(hf_callback)
+            print("🤗 Hugging Face upload callback added - models will be automatically uploaded!")
 
         # Log dataloader information
         train_dl_len = len(trainer.get_train_dataloader())
         # eval_dl_len = len(trainer.get_eval_dataloader()) # @note (k2): How to manage eval dataloader?
 
+        try:
+            dataset_len = len(self.train_dataset) if hasattr(self.train_dataset, '__len__') else "Unknown"
+        except (TypeError, AttributeError):
+            dataset_len = "Unknown"
         print(
             f"train dataloader length: {train_dl_len}\n"
             # f"eval dataloader length: {eval_dl_len}\n"
-            f"train dataset length: {len(trainer.train_dataset)}\n"
+            f"train dataset length: {dataset_len}\n"
             f"GPU memory before training: {torch.cuda.memory_allocated() / 1024 / 1024 / 1024} GB",
             flush=True,
         )

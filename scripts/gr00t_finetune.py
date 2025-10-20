@@ -193,6 +193,22 @@ def _copy_partial_action_expert_weights(old_dict, new_dict, old_dim, new_dim):
 
 def main(config: ArgsConfig):
     """Main training function."""
+    
+    # Print Hugging Face upload configuration
+    print("\n" + "=" * 60)
+    print("🤗 Hugging Face Upload Configuration")
+    print("=" * 60)
+    hf_enabled = os.getenv("HF_UPLOAD_ENABLED", "false").lower() == "true"
+    print(f"Upload Enabled: {hf_enabled}")
+    if hf_enabled:
+        print(f"Repository: {os.getenv('HF_REPO_ID', 'Not set')}")
+        print(f"Token: {'Set' if os.getenv('HF_TOKEN') else 'Not set'}")
+        print(f"Private: {os.getenv('HF_PRIVATE', 'false')}")
+        print("Model will be uploaded after training completes! 🚀")
+    else:
+        print("Set HF_UPLOAD_ENABLED=true to enable automatic upload")
+    print("=" * 60 + "\n")
+    
     # ------------ step 1: load dataset ------------
     embodiment_tag = EmbodimentTag(config.embodiment_tag)
 
@@ -390,6 +406,92 @@ def main(config: ArgsConfig):
 
     # 2.3 run experiment
     experiment.train()
+
+    # 2.4 Upload to Hugging Face if enabled
+    upload_model_to_hf(config.output_dir, config)
+
+
+#####################################################################################
+# Hugging Face Upload Functions
+#####################################################################################
+
+
+def upload_model_to_hf(output_dir: str, config: ArgsConfig):
+    """Upload the trained model to Hugging Face Hub if environment variables are set."""
+    # Check if upload is enabled
+    hf_enabled = os.getenv("HF_UPLOAD_ENABLED", "false").lower() == "true"
+    if not hf_enabled:
+        print("🔄 Hugging Face upload disabled (HF_UPLOAD_ENABLED not set to true)")
+        return
+    
+    # Check required environment variables
+    repo_id = os.getenv("HF_REPO_ID")
+    token = os.getenv("HF_TOKEN")
+    
+    if not repo_id:
+        print("❌ HF_REPO_ID environment variable not set - skipping upload")
+        return
+    
+    if not token:
+        print("❌ HF_TOKEN environment variable not set - skipping upload")
+        return
+    
+    print(f"\n🚀 Starting automatic upload to Hugging Face Hub: {repo_id}")
+    
+    try:
+        # Import here to avoid errors if huggingface_hub is not installed
+        from gr00t.utils.huggingface_upload import HuggingFaceUploader
+        
+        # Get upload settings
+        private = os.getenv("HF_PRIVATE", "false").lower() == "true"
+        
+        # Create uploader
+        uploader = HuggingFaceUploader(
+            repo_id=repo_id,
+            token=token,
+            private=private,
+        )
+        
+        # Create training info from config
+        training_info = {
+            'script': 'gr00t_finetune.py',
+            'base_model_path': config.base_model_path,
+            'max_steps': config.max_steps,
+            'batch_size': config.batch_size,
+            'learning_rate': config.learning_rate,
+            'lora_rank': config.lora_rank,
+            'tune_visual': config.tune_visual,
+            'tune_llm': config.tune_llm,
+            'tune_projector': config.tune_projector,
+            'tune_diffusion_model': config.tune_diffusion_model,
+            'data_config': config.data_config,
+            'embodiment_tag': config.embodiment_tag,
+        }
+        
+        # Create dataset info
+        dataset_info = {
+            'paths': config.dataset_path,
+            'data_config': config.data_config,
+            'embodiment_tag': config.embodiment_tag,
+        }
+        
+        # Upload the model
+        uploader.upload_model(
+            model_path=output_dir,
+            training_info=training_info,
+            dataset_info=dataset_info,
+            commit_message=f"Fine-tuned GR00T model using {config.data_config} configuration",
+        )
+        
+        print(f"✅ Successfully uploaded model to {repo_id}!")
+        print(f"🌐 Model available at: https://huggingface.co/{repo_id}")
+        
+    except ImportError as e:
+        print(f"❌ Upload failed - missing dependency: {str(e)}")
+        print("💡 Install huggingface_hub to enable uploads: pip install huggingface_hub")
+    except Exception as e:
+        print(f"❌ Upload failed: {str(e)}")
+        print("💡 Training completed successfully, but upload failed")
 
 
 if __name__ == "__main__":
